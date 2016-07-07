@@ -40,6 +40,9 @@ public class CommonRulesConstants {
   public static final String RULE_INSUFFICIENT_BRANCH_COVERAGE = "InsufficientBranchCoverage";
   public static final String PARAM_MIN_BRANCH_COVERAGE = "minimumBranchCoverageRatio";
 
+  public static final String RULE_INSUFFICIENT_OVERALL_BRANCH_COVERAGE = "InsufficientOverallBranchCoverage";
+  public static final String PARAM_MIN_OVERALL_BRANCH_COVERAGE = "minimumOverallBranchCoverageRatio";
+
   public static final String RULE_INSUFFICIENT_LINE_COVERAGE = "InsufficientLineCoverage";
   public static final String PARAM_MIN_LINE_COVERAGE = "minimumLineCoverageRatio";
 

@@ -25,12 +25,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.AnnotationUtils;
 import org.sonar.squidbridge.annotations.AnnotationBasedRulesDefinition;
 import org.sonar.squidbridge.commonrules.api.CommonRulesRepository;
-import org.sonar.squidbridge.commonrules.internal.checks.BranchCoverageCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.CommentDensityCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.DuplicatedBlocksCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.FailedUnitTestsCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.LineCoverageCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.SkippedUnitTestsCheck;
+import org.sonar.squidbridge.commonrules.internal.checks.*;
 
 import javax.annotation.Nullable;
 
@@ -39,9 +34,11 @@ import java.util.List;
 import java.util.Set;
 
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.PARAM_MIN_BRANCH_COVERAGE;
+import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.PARAM_MIN_OVERALL_BRANCH_COVERAGE;
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.PARAM_MIN_COMMENT_DENSITY;
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.PARAM_MIN_LINE_COVERAGE;
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.RULE_INSUFFICIENT_BRANCH_COVERAGE;
+import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.RULE_INSUFFICIENT_OVERALL_BRANCH_COVERAGE;
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.RULE_INSUFFICIENT_COMMENT_DENSITY;
 import static org.sonar.squidbridge.commonrules.internal.CommonRulesConstants.RULE_INSUFFICIENT_LINE_COVERAGE;
 
@@ -63,6 +60,7 @@ public class DefaultCommonRulesRepository implements RulesDefinition, CommonRule
       .setName("Common SonarQube");
     AnnotationBasedRulesDefinition.load(repo, language, enabledChecks);
     setParamValue(repo.rule(RULE_INSUFFICIENT_BRANCH_COVERAGE), PARAM_MIN_BRANCH_COVERAGE, minimumBranchCoverageRatio);
+    setParamValue(repo.rule(RULE_INSUFFICIENT_OVERALL_BRANCH_COVERAGE), PARAM_MIN_OVERALL_BRANCH_COVERAGE, minimumBranchCoverageRatio);
     setParamValue(repo.rule(RULE_INSUFFICIENT_LINE_COVERAGE), PARAM_MIN_LINE_COVERAGE, minimumLineCoverageRatio);
     setParamValue(repo.rule(RULE_INSUFFICIENT_COMMENT_DENSITY), PARAM_MIN_COMMENT_DENSITY, minimumCommentDensity);
     repo.done();
@@ -91,6 +89,13 @@ public class DefaultCommonRulesRepository implements RulesDefinition, CommonRule
   public DefaultCommonRulesRepository enableInsufficientBranchCoverageRule(@Nullable Double minimumBranchCoverageRatio) {
     this.minimumBranchCoverageRatio = minimumBranchCoverageRatio;
     enabledChecks.add(BranchCoverageCheck.class);
+    return this;
+  }
+
+  @Override
+  public DefaultCommonRulesRepository enableInsufficientOverallBranchCoverageRule(@Nullable Double minimumBranchCoverageRatio) {
+    this.minimumBranchCoverageRatio = minimumBranchCoverageRatio;
+    enabledChecks.add(OverallBranchCoverageCheck.class);
     return this;
   }
 

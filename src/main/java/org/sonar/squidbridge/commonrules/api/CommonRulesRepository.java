@@ -33,6 +33,8 @@ public interface CommonRulesRepository {
 
   CommonRulesRepository enableInsufficientBranchCoverageRule(@Nullable Double minBranchCoverageRatio);
 
+  CommonRulesRepository enableInsufficientOverallBranchCoverageRule(@Nullable Double minBranchCoverageRatio);
+
   CommonRulesRepository enableInsufficientLineCoverageRule(@Nullable Double minLineCoverageRatio);
 
   CommonRulesRepository enableInsufficientCommentDensityRule(@Nullable Double minCommentDensity);
