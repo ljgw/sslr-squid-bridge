@@ -47,6 +47,7 @@ public class DefaultCommonRulesRepository implements RulesDefinition, CommonRule
   private List<Class> enabledChecks = new ArrayList<Class>();
   private String language;
   private Double minimumBranchCoverageRatio;
+  private Double minimumOverallBranchCoverageRatio;
   private Double minimumLineCoverageRatio;
   private Double minimumCommentDensity;
 
@@ -57,10 +58,10 @@ public class DefaultCommonRulesRepository implements RulesDefinition, CommonRule
   @Override
   public void define(Context context) {
     NewRepository repo = context.createRepository(keyForLanguage(language), language)
-      .setName("Common SonarQube");
+            .setName("Common SonarQube");
     AnnotationBasedRulesDefinition.load(repo, language, enabledChecks);
     setParamValue(repo.rule(RULE_INSUFFICIENT_BRANCH_COVERAGE), PARAM_MIN_BRANCH_COVERAGE, minimumBranchCoverageRatio);
-    setParamValue(repo.rule(RULE_INSUFFICIENT_OVERALL_BRANCH_COVERAGE), PARAM_MIN_OVERALL_BRANCH_COVERAGE, minimumBranchCoverageRatio);
+    setParamValue(repo.rule(RULE_INSUFFICIENT_OVERALL_BRANCH_COVERAGE), PARAM_MIN_OVERALL_BRANCH_COVERAGE, minimumOverallBranchCoverageRatio);
     setParamValue(repo.rule(RULE_INSUFFICIENT_LINE_COVERAGE), PARAM_MIN_LINE_COVERAGE, minimumLineCoverageRatio);
     setParamValue(repo.rule(RULE_INSUFFICIENT_COMMENT_DENSITY), PARAM_MIN_COMMENT_DENSITY, minimumCommentDensity);
     repo.done();
@@ -93,8 +94,8 @@ public class DefaultCommonRulesRepository implements RulesDefinition, CommonRule
   }
 
   @Override
-  public DefaultCommonRulesRepository enableInsufficientOverallBranchCoverageRule(@Nullable Double minimumBranchCoverageRatio) {
-    this.minimumBranchCoverageRatio = minimumBranchCoverageRatio;
+  public DefaultCommonRulesRepository enableInsufficientOverallBranchCoverageRule(@Nullable Double minimumOverallBranchCoverageRatio) {
+    this.minimumOverallBranchCoverageRatio = minimumOverallBranchCoverageRatio;
     enabledChecks.add(OverallBranchCoverageCheck.class);
     return this;
   }

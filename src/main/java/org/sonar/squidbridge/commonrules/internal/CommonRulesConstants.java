@@ -19,12 +19,7 @@
  */
 package org.sonar.squidbridge.commonrules.internal;
 
-import org.sonar.squidbridge.commonrules.internal.checks.BranchCoverageCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.CommentDensityCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.DuplicatedBlocksCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.FailedUnitTestsCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.LineCoverageCheck;
-import org.sonar.squidbridge.commonrules.internal.checks.SkippedUnitTestsCheck;
+import org.sonar.squidbridge.commonrules.internal.checks.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +55,7 @@ public class CommonRulesConstants {
     DuplicatedBlocksCheck.class,
     LineCoverageCheck.class,
     BranchCoverageCheck.class,
+    OverallBranchCoverageCheck.class,
     CommentDensityCheck.class,
     SkippedUnitTestsCheck.class,
     FailedUnitTestsCheck.class);

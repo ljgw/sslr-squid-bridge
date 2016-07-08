@@ -28,7 +28,7 @@ public final class CommonRulesConstantsTest {
 
   @Test
   public void allChecksShouldBeDeclaredInConstants() throws Exception {
-    assertThat(CommonRulesConstants.CLASSES.size()).isEqualTo(6);
+    assertThat(CommonRulesConstants.CLASSES.size()).isEqualTo(7);
   }
 
 }

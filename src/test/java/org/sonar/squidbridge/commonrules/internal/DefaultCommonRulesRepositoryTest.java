@@ -38,6 +38,7 @@ public final class DefaultCommonRulesRepositoryTest {
       .enableDuplicatedBlocksRule()
       .enableInsufficientCommentDensityRule(42.0)
       .enableInsufficientBranchCoverageRule(42.0)
+      .enableInsufficientOverallBranchCoverageRule(42.0)
       .enableInsufficientLineCoverageRule(42.0)
       .enableSkippedUnitTestsRule();
 
